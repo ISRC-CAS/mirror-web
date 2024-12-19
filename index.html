@@ -1,0 +1,143 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="./css/mirror.css" media="screen" />
+    <script type="text/javascript" src="./js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="./js/download.js"></script>
+    <script type="text/javascript" src="./js/mirrorList.js"></script>
+    <link rel="icon" href="./images/iscas_logo.png" />
+    <title>欢迎访问 ISCAS 开源镜像站</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <h1>欢迎来到</h1>
+                    <div id="logo">
+                        <img src="./images/iscaslogo.png" alt="ISCAS_logo" />
+                    </div>
+                    <h1>开源镜像站</h1>
+                </div>
+                <div class="nav-tabs">
+                    <button class="tab-btn" data-tab="iso">镜像列表</button>
+                    <div class="dropdown">
+                        <button class="tab-btn dropdown-toggle" data-tab="mirror-download">
+                            获取安装镜像
+                            <span class="arrow"></span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-content">
+                                <div  class="dropdown-item" data-type="os">操作系统</div>
+                                <div  class="dropdown-item" data-type="apps">应用软件</div>
+                                <div  class="dropdown-item" data-type="fonts">字体</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="filter-popup" style="display: none;">
+                <div class="filter-popup-content">
+                    <div class="filter-options">
+                        <label class="filter-option">
+                            <input type="checkbox" value="success" checked>
+                            <span class="checkbox-custom"></span>
+                            同步成功
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" value="syncing" checked>
+                            <span class="checkbox-custom"></span>
+                            同步中
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" value="failed" checked>
+                            <span class="checkbox-custom"></span>
+                            同步失败
+                        </label>
+                    </div>
+                    <div class="filter-actions">
+                        <button class="filter-confirm">确定</button>
+                    </div>
+                </div>
+            </div>
+            <table id="distro-table" cellpadding="0" cellspacing="0">
+                <colgroup>
+                    <col width="15%" />
+                    <col width="15%" />
+                    <col width="15%" />
+                    <col width="15%" />
+                    <col width="15%" />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th><span>镜像名</span></th>
+                        <th>
+                            <div class="sort-header">
+                                <span>上次更新时间</span>
+                                <div class="sort-icon" data-sort="update-time">
+                                    <svg viewBox="0 0 24 24" width="14" height="14">
+                                        <path d="M7 14l5-5 5 5z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="status-header">
+                                <span>状态</span>
+                                <div class="filter-icon">
+                                    <svg viewBox="0 0 24 24" width="16" height="16">
+                                        <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </th>
+                        <th><span>镜像大小</span></th>
+                        <th>使用帮助</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div id="footer">
+            <p>
+                <a target="_blank" href="https://isrc.iscas.ac.cn/">Intelligent Software Research Center</a>
+                <a target="_blank" href="https://is.cas.cn/">Institute of Software</a>
+                <a target="_blank" href="https://www.cas.cn/">Chinese Academy of Sciences</a>
+            </p>
+            <p>
+                <a target="_blank" href="https://github.com/isrc-cas/mirror-requests/issues/new/choose">Mirrors-Feedbacks</a>
+                <a target="_blank" href="mailto://isrc@iscas.ac.cn">Email us</a>
+            </p>
+            <p>
+                <a target="_blank" href="https://beian.miit.gov.cn/"></a>京ICP备05046678号-1</a>
+            </p>
+        </div>
+       
+    </div>
+    <div class="os-container" style="display: none;">
+        <div class="os-sidebar">
+            <div class="sidebar-header">操作系统列表</div>
+            <ul class="os-menu">
+          
+            </ul>
+        </div>
+        <div class="os-content">
+            <div class="os-header">
+                <h2 class="os-title">下载文件</h2>
+            </div>
+            <div class="os-list">
+    
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
