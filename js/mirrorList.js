@@ -1,26 +1,20 @@
-var mirror = {
+// 镜像配置对象，设置更新间隔时间为60秒
+let mirror = {
     interval: 60000,
 }
-var isInitTable = false;
-var classListCustom = [{
-        isMirrName: true
-    },
-    {
-        className: 'update-time'
-    },
-    {
-        className: 'sync-status'
-    },
-    {
-        className: 'mirror-size'
-    },
-    {
-        isHelp: true
-    }
+// 表格初始化状态标志
+let isInitTable = false;
+// 定义表格列的配置
+let classListCustom = [
+    { isMirrName: true },      // 镜像名称列
+    { className: 'update-time' }, // 更新时间列
+    { className: 'sync-status' }, // 同步状态列
+    { className: 'mirror-size' }, // 镜像大小列
+    { isHelp: true }           // 帮助文档列
 ]
 
 // 帮助文档
-var mirrorHelpList = {
+let mirrorHelpList = {
     'alpine': 'https://help.mirrors.cernet.edu.cn/alpine/?mirror=ISRC-ISCAS',
     'anthon': 'https://help.mirrors.cernet.edu.cn/anthon/?mirror=ISRC-ISCAS',
     'aosp-monthly': 'https://help.mirrors.cernet.edu.cn/aosp-monthly/?mirror=ISRC-ISCAS',
@@ -119,8 +113,8 @@ var mirrorHelpList = {
     'voidlinux': 'https://help.mirrors.cernet.edu.cn/voidlinux/?mirror=ISRC-ISCAS'
 }
 
-// 兼容IE8
-var statusMap = new Map();
+// 镜像状态映射表
+let statusMap = new Map();
 statusMap.set("success", "同步成功");
 statusMap.set("failed", "同步失败");
 statusMap.set("syncing", "同步中...");
@@ -129,15 +123,13 @@ statusMap.set("paused", "暂停同步");
 statusMap.set("disabled", "停止同步");
 
 // 添加筛选状态数组
-var selectedStatuses = ['success', 'syncing', 'failed'];
+let selectedStatuses = ['success', 'syncing', 'failed'];
 
 // 添加排序状态
-var sortConfig = {
+let sortConfig = {
     column: null,
     direction: 'asc'
 };
-
-
 
 // 在 document ready 时初始化筛选器
 $(document).ready(function () {
@@ -160,30 +152,43 @@ $(document).ready(function () {
         }
     });
 
-    // 监听复选框变化
+
+    // 为筛选选项中的复选框添加变化事件监听器
     $('.filter-option input[type="checkbox"]').on('change', function () {
+        // 获取当前复选框的值
         const value = $(this).val();
+        
+        // 如果复选框被选中
         if (this.checked) {
+            // 检查该状态是否已经在选中状态数组中
             if (!selectedStatuses.includes(value)) {
+                // 如果不在，则添加到选中状态数组中
                 selectedStatuses.push(value);
             }
         } else {
+            // 如果复选框被取消选中，则从数组中移除该状态
+            // 使用 filter 方法创建新数组，只保留不等于当前值的状态
             selectedStatuses = selectedStatuses.filter(status => status !== value);
         }
     });
-
-    // 在 document ready 时添加筛选图标点击事件
+     // 为筛选图标添加点击事件监听器
     $('.filter-icon').on('click', function (e) {
+        // 阻止事件冒泡，防止点击图标时触发文档的点击事件
         e.stopPropagation();
+        
+        // 获取筛选弹出框元素
         const filterPopup = $('.filter-popup');
+        // 获取当前被点击的图标元素
         const icon = $(this);
+        // 获取图标的位置信息
         const iconPos = icon.offset();
+        // 获取图标的高度
         const iconHeight = icon.outerHeight();
-
+         // 设置弹出框的CSS样式
         filterPopup.css({
-            display: 'block',
-            top: iconPos.top + iconHeight + 5,
-            left: iconPos.left - 50 // 调整位置使弹窗居中于图标
+            display: 'block',                    // 显示弹出框
+            top: iconPos.top + iconHeight + 5,   // 设置弹出框的垂直位置（图标底部下方5像素）
+            left: iconPos.left - 50              // 设置弹出框的水平位置（向左偏移50像素使其居中）
         });
     });
 
@@ -249,7 +254,7 @@ function renderMirrorHelp(mirrorName, content) {
 
 // 修改 Markdown 格式化函数
 function formatMarkdown(content) {
-    // 首先移除 frontmatter
+    // 移除 frontmatter
     content = content.replace(/^---[\s\S]*?---/, '').trim();
     
     // 替换变量和特殊标记
@@ -258,32 +263,80 @@ function formatMarkdown(content) {
         .replace(/{{mirror}}/g, '/mirror')  
         .replace(/{{enable_checksum}}/g, '')
         .replace(/\{\{[^}]+\}\}/g, '') 
-        .replace(/\$r/g, '');  
+        .replace(/\$r/g, '')
+        .trim();
+
+    // 先处理代码块，避免干扰其他转换
+    content = content.replace(/```([\s\S]*?)```/g, '<pre class="code-block"><code>$1</code></pre>');
     
-    // 基本的 Markdown 语法转换
-    return content
-        // 代码块
-        .replace(/```([\s\S]*?)```/g, '<pre class="code-block"><code>$1</code></pre>')
-        // 行内代码
-        .replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>')
-        // 标题
-        .replace(/^### (.*$)/gm, '<h3>$1</h3>')
-        .replace(/^## (.*$)/gm, '<h2>$1</h2>')
-        .replace(/^# (.*$)/gm, '<h1>$1</h1>')
-        // 列表
-        .replace(/^\s*[-*+]\s+(.*)$/gm, '<li>$1</li>')
-        // 段落
-        .replace(/^(?!<[h|l|p|u])(.*$)/gm, '<p>$1</p>')
-        // 链接
-        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
-        // 强调
-        .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-        .replace(/\*([^*]+)\*/g, '<em>$1</em>')
-        // 清理空段落
-        .replace(/<p>\s*<\/p>/g, '');
+    // 将内容按行分割处理
+    const lines = content.split('\n');
+    let html = '';
+    let inList = false;
+    
+    for (let line of lines) {
+        line = line.trim();
+        if (!line) continue; // 跳过空行
+        
+        // 处理引用块
+        if (line.startsWith('>')) {
+            const quoteContent = line.slice(1).trim();
+            if (quoteContent) {
+                html += `<blockquote>${quoteContent}</blockquote>\n`;
+            }
+            continue;
+        }
+        
+        // 处理标题
+        if (line.startsWith('###')) {
+            html += `<h3>${line.slice(3).trim()}</h3>\n`;
+            continue;
+        }
+        if (line.startsWith('##')) {
+            html += `<h2>${line.slice(2).trim()}</h2>\n`;
+            continue;
+        }
+        if (line.startsWith('#')) {
+            html += `<h1>${line.slice(1).trim()}</h1>\n`;
+            continue;
+        }
+        
+        // 处理列表项
+        if (line.match(/^\s*[-*+]\s/)) {
+            if (!inList) {
+                html += '<ul>\n';
+                inList = true;
+            }
+            html += `<li>${line.replace(/^\s*[-*+]\s/, '').trim()}</li>\n`;
+            continue;
+        } else if (inList) {
+            html += '</ul>\n';
+            inList = false;
+        }
+        
+        // 处理行内格式
+        line = line
+            .replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>')
+            .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
+            .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*([^*]+)\*/g, '<em>$1</em>');
+        
+        // 处理普通段落
+        if (!line.startsWith('<')) {
+            html += `<p>${line}</p>\n`;
+        } else {
+            html += line + '\n';
+        }
+    }
+    
+    if (inList) {
+        html += '</ul>\n';
+    }
+    
+    return html.trim();
 }
 
-// 添筛选表格函数
+// 筛选表格函数
 function filterTable() {
     const rows = $('#distro-table tbody tr');
 
@@ -308,67 +361,78 @@ function getStatusFromButton(button) {
     return '';
 }
 
+// 比较函数，用于数组排序
 function compare(p) {
     return function (m, n) {
-        var a = m[p];
-        var b = n[p];
-        return a.localeCompare(b);
+        let a = m[p];
+        let b = n[p];
+        return a.localeCompare(b); // 按字符串比较
     }
 }
 
 mirror.update = function update() {
-    // 取出tunasync同步工具的数据，进行json解析并更新首页的表格
+    // 获取同步状态数据并更新表格
     $.get("./syncstatus.json", function (data) {
-        var dataTmp = data.slice(0)
-        dataTmp.sort(compare('name'));
+        let dataTmp = data.slice(0)  // 创建数据副本
+        dataTmp.sort(compare('name')); // 按名称排序
+        // 首次加载时创建表格DOM
         !isInitTable && createdynamicDom(dataTmp.length, dataTmp);
-        for (var i = 0, n = dataTmp.length; i < n; i++) {
-            var job = dataTmp[i];
-            var updateClass = "." + job.name.replaceAll(/\./g, '') + ".update-time";
-            var statusClass = "." + job.name.replaceAll(/\./g, '') + ".sync-status";
-            var sizeClass = "." + job.name.replaceAll(/\./g, '') + ".mirror-size";
+        
+        // 遍历更新每个镜像的状态
+        for (let i = 0, n = dataTmp.length; i < n; i++) {
+            let job = dataTmp[i];
+            // 构造各列的类名选择器
+            let updateClass = "." + job.name.replaceAll(/\./g, '') + ".update-time";
+            let statusClass = "." + job.name.replaceAll(/\./g, '') + ".sync-status";
+            let sizeClass = "." + job.name.replaceAll(/\./g, '') + ".mirror-size";
+            // 更新显示内容
             $(updateClass).html(job.last_update.substring(0, 19));
             $(statusClass).html(statusMap.get(job.status));
             $(sizeClass).html(job.size);
         }
-        // 更新数据后应用前的筛选条
-        filterTable();
+        filterTable(); // 应用筛选条件
     });
 }
 
 function createdynamicDom(colCount, data) {
     isInitTable = true;
-    var tobodyDom = document.querySelector('#distro-table tbody');
-    for (var i = 0; i < colCount; i++) {
-        var tr = document.createElement('tr');
-        tr.className = i % 2 == 0 ? 'odd' : 'even';
-        var job = data[i];
-        for (var j = 0; j < 5; j++) {
-            var td = document.createElement('td');
+    let tobodyDom = document.querySelector('#distro-table tbody');
+    
+    // 创建表格行
+    for (let i = 0; i < colCount; i++) {
+        let tr = document.createElement('tr');
+        tr.className = i % 2 == 0 ? 'odd' : 'even';  // 设置奇偶行样式
+        let job = data[i];
+        
+        // 创建每行的5个单元格
+        for (let j = 0; j < 5; j++) {
+            let td = document.createElement('td');
+            
+            // 同步状态列：创建状态按钮
             if (classListCustom[j].className === 'sync-status') {
-                var button = document.createElement('button');
-                var statusClass = '';
+                let button = document.createElement('button');
+                // 根据同步状态设置不同的样式类
+                let statusClass = '';
                 switch (job.status) {
-                    case 'success':
-                        statusClass = 'success';
-                        break;
-                    case 'failed':
-                        statusClass = 'failed';
-                        break;
-                    case 'syncing':
-                        statusClass = 'syncing';
-                        break;
-                    default:
-                        statusClass = 'other';
+                    case 'success': statusClass = 'success'; break;
+                    case 'failed': statusClass = 'failed'; break;
+                    case 'syncing': statusClass = 'syncing'; break;
+                    default: statusClass = 'other';
                 }
-                button.className = job.name.replaceAll(/\./g, '') + ' sync-status ' + statusClass;
+                button.className = `${job.name.replaceAll(/\./g, '')} sync-status ${statusClass}`;
                 button.textContent = statusMap.get(job.status);
                 td.appendChild(button);
-            } else if (classListCustom[j].isMirrName) {
+            } 
+            // 镜像名称列：创建链接
+            else if (classListCustom[j].isMirrName) {
                 td.innerHTML = `<a href="${job.name}">${job.name}</a>`;
-            } else if (classListCustom[j].className) {
+            }
+            // 其他带类名的列
+            else if (classListCustom[j].className) {
                 td.className = job.name.replaceAll(/\./g, '') + ' ' + classListCustom[j].className;
-            } else if (classListCustom[j].isHelp) {
+            }
+            // 帮助列：添加帮助图标和提示
+            else if (classListCustom[j].isHelp) {
                 if (mirrorHelpList[job.name]) {
                     td.innerHTML = `
                         <div class="help-container" data-mirror="${job.name}">
@@ -389,25 +453,30 @@ function createdynamicDom(colCount, data) {
 }
 
 mirror.init = function () {
-    this.update();
-    // 定时刷新，同时需使用定时脚本：
+    this.update();  // 初始更新
+    // 设置定时刷新
     setInterval(function () {
         this.update();
     }.bind(this), this.interval);
 }
 
-// 修改排序表格函数
+// 表格排序函数
 function sortTable(column, direction) {
     const tbody = $('#distro-table tbody');
-    const rows = tbody.find('tr').toArray();
+    const rows = tbody.find('tr').toArray();  // 获取所有表格行并转换为数组
 
     rows.sort((a, b) => {
         let aValue, bValue;
 
+        // 处理更新时间列的排序
         if (column === 'update-time') {
+            // 获取更新时间单元格的文本内容
             aValue = $(a).find('.update-time').text();
             bValue = $(b).find('.update-time').text();
-            // 日期比较
+            
+            // 根据排序方向进行日期比较
+            // asc: 升序，从早到晚
+            // desc: 降序，从晚到早
             return direction === 'asc' ?
                 new Date(aValue) - new Date(bValue) :
                 new Date(bValue) - new Date(aValue);
@@ -415,25 +484,30 @@ function sortTable(column, direction) {
         return 0;
     });
 
-    // 重新添加排序后的行
+    // 清空表格并重新插入排序后的行
     tbody.empty();
     rows.forEach(row => tbody.append(row));
 
-    // 保持奇偶行的样式
+    // 重新应用奇偶行的样式类
     rows.forEach((row, index) => {
         $(row).removeClass('odd even').addClass(index % 2 === 0 ? 'odd' : 'even');
     });
 }
 
-
-
-function replaceVariables(text, mirrorPath) {
+// 变量替换函数：替换帮助文本中的模板变量
+function replaceletiables(text, mirrorPath) {
+    // 检查输入是否为字符串
     if (typeof text !== 'string') return text;
     
     return text
+        // 替换协议和域名
         .replace(/{{http_protocol}}/g, 'https://mirror.iscas.ac.cn')
+        // 替换镜像路径
         .replace(/{{mirror}}/g, mirrorPath)
+        // 移除校验和占位符
         .replace(/{{enable_checksum}}/g, '')
+        // 移除所有其他双大括号模板变量
         .replace(/\{\{[^}]+\}\}/g, '')
-        .replace(/\$r/g, ''); // 移除所有的$r
+        // 移除所有的$r变量
+        .replace(/\$r/g, '');
 }

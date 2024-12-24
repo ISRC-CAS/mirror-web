@@ -90,7 +90,7 @@ jQuery(document).ready(function($) {
         
         // 当点击镜像列表tab时显示content和footer并重置下拉框
         if (tabId === 'iso') {
-            $('.content, #footer').show();
+            $('.mirror-list, #footer').show();
             $('.os-container').hide(); // 隐藏组件容器
             // 重置下拉框文本为默认值
             $('.dropdown-toggle').html('获取安装镜像<span class="arrow"></span>');
@@ -157,7 +157,7 @@ jQuery(document).ready(function($) {
         }
         
         if (viewer) {
-            $('.content, #footer').hide();
+            $('.mirror-list').hide();
             viewer.render();
         }
     }
