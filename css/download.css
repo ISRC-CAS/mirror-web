@@ -1,0 +1,147 @@
+/* 主容器样式 */
+.os-container {
+    display: flex;
+    width: 50%;
+    margin-bottom:10px;
+    margin: 0 auto ;
+    margin-bottom:30px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    min-height: 80vh;
+}
+
+/* 侧边栏相关样式 */
+.os-sidebar {
+    width: 240px;
+    border-right: 1px solid #eee;
+    background: #f8f9fa;
+    border-radius: 8px 0 0 8px;
+}
+
+.sidebar-header {
+    padding: 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #2c3e50;
+    border-bottom: 1px solid #eee;
+}
+
+/* 侧边栏菜单相关样式 */
+.os-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.os-menu li {
+    padding: 0;
+}
+
+.os-menu a {
+    display: block;
+    padding: 0.8rem 1.5rem;
+    color: #666;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+}
+
+.os-menu a:hover {
+    background: #eef2f7;
+    color: #1e88e5;
+    border-left-color: #1e88e5;
+}
+
+.os-menu a.active {
+    background: #e3f2fd;
+    color: #1e88e5;
+    border-left-color: #1e88e5;
+}
+
+/* 内容区域相关样式 */
+.os-content {
+    flex: 1;
+    padding: 1.5rem;
+}
+
+.os-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.os-title {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+/* 下载列表网格布局 */
+.os-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+}
+
+/* 下载卡片相关样式 */
+.os-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: 120px;
+}
+
+.os-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.os-card h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.4;
+    flex: 1;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.os-card .version {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+/* 下载按钮相关样式 */
+.os-card .download-btn-container {
+    margin-top: auto;
+    text-align: right;
+}
+
+.os-card .download-btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: #1e88e5;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background 0.2s ease;
+    white-space: nowrap;
+    width:30px;
+    text-align: center;
+}
+
+.os-card .download-btn:hover {
+    background: #1976d2;
+}
+
+
