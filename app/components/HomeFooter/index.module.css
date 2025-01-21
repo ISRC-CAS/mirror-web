@@ -1,0 +1,58 @@
+/* 页脚基础样式 */
+.footer {
+  padding: 2rem 0;
+  text-align: center;
+  width: 100%;
+
+  bottom: 0;
+  left: 0;
+}
+
+[data-theme="light"] .footer-content {
+  color: #5f6059;
+}
+
+[data-theme="light"] .footer a {
+  color: #5f6059;
+}
+
+[data-theme="dark"] .footer-content {
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .footer a {
+  color: #e0e0e0;
+}
+
+/* 共用样式 */
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  font-size: 0.9rem;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.footer a {
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer a:hover {
+  color: #ec6e01;
+}
+
+.footer-text {
+  margin: 0.5rem 0;
+}
+
+.divider {
+  margin: 0 0.5rem;
+  opacity: 0.5;
+}

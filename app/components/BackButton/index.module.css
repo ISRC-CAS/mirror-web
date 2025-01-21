@@ -1,0 +1,19 @@
+.back-button-group {
+  display: flex;
+  gap: 10px;
+}
+.back-button {
+  display: flex;
+  background-color: #ccc;
+  padding: 5px;
+  box-sizing: border-box;
+  align-items: center;
+  gap: 6px;
+  border: none;
+}
+.back-button span {
+  font-size: 16px;
+  font-family: Georgia, Palatino, "Palatino Linotype", Times, "Times New Roman",
+    serif;
+  color: #551a8b;
+}

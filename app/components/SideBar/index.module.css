@@ -1,0 +1,71 @@
+/* 侧边栏相关样式 */
+.os-sidebar {
+  width: 240px;
+  border: 1px solid #eee;
+  border-radius: 8px 0 0 8px;
+  background-color: #fff;
+}
+
+[data-theme="dark"] .os-sidebar {
+  background-color: #1e1e1e;
+  border-color: #2d2d30;
+}
+
+.sidebar-header {
+  padding: 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #2c3e50;
+  border-bottom: 1px solid #eee;
+}
+
+[data-theme="dark"] .sidebar-header {
+  color: #e0e0e0;
+  border-bottom-color: #2d2d30;
+}
+
+/* 侧边栏菜单相关样式 */
+.os-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.os-menu li {
+  padding: 0;
+}
+
+.os-menu a {
+  display: block;
+  padding: 0.8rem 1.5rem;
+  color: #666;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+[data-theme="dark"] .os-menu a {
+  color: #a0a0a0;
+}
+
+.os-menu a:hover {
+  background: #eef2f7;
+  color: #ec6e01;
+  border-left-color: #ec6e01;
+}
+
+[data-theme="dark"] .os-menu a:hover {
+  background: #2d2d30;
+  color: #ec6e01;
+}
+
+.os-menu a.active {
+  background: #e3f2fd;
+  color: #ec6e01;
+  border-left-color: #ec6e01;
+}
+
+[data-theme="dark"] .os-menu a.active {
+  background: #252526;
+  color: #ec6e01;
+}

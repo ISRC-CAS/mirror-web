@@ -1,0 +1,123 @@
+/* 下载列表网格布局 */
+.os-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+}
+
+/* 内容区域相关样式 */
+.os-content {
+  flex: 1;
+  padding: 1.5rem;
+  border: 1px solid #eee;
+  border-radius: 0 8px 8px 0;
+}
+
+[data-theme="dark"] .os-content {
+  background-color: #1e1e1e;
+  border-color: #2d2d30;
+}
+
+.os-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+[data-theme="dark"] .os-header {
+  border-bottom-color: #2d2d30;
+}
+
+.os-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+[data-theme="dark"] .os-title {
+  color: #e0e0e0;
+}
+
+/* 下载卡片相关样式 */
+.os-card {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  min-height: 120px;
+  background-color: #fff;
+}
+
+[data-theme="dark"] .os-card {
+  background-color: #252526;
+  border-color: #2d2d30;
+}
+
+.os-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .os-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.os-card h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  line-height: 1.4;
+  flex: 1;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+[data-theme="dark"] .os-card h3 {
+  color: #e0e0e0;
+}
+
+.os-card .version {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+[data-theme="dark"] .os-card .version {
+  color: #a0a0a0;
+}
+
+/* 下载按钮相关样式 */
+.os-card .download-btn-container {
+  margin-top: auto;
+  text-align: right;
+}
+
+.os-card .download-btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: #ec6e01;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  width: 30px;
+  text-align: center;
+}
+
+.os-card .download-btn:hover {
+  background: #ff7b0f;
+}
+
+[data-theme="dark"] .os-card .download-btn {
+  background: #ec6e01;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .os-card .download-btn:hover {
+  background: #ff7b0f;
+  box-shadow: 0 2px 8px rgba(236, 110, 1, 0.3);
+}
