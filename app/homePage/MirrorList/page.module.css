@@ -1,0 +1,374 @@
+/* 镜像源列表部分样式 */
+
+/* 同步状态样式 */
+.sync-status {
+  border-radius: 5px;
+  border: none;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0 auto;
+}
+
+.sync-status::before {
+  content: "";
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: center;
+  border: 1px solid;
+  border-radius: 50%;
+}
+
+.sync-status.success {
+  background-color: #f0f9eb;
+  color: #67c23a;
+  border: 1px solid #c2e7b0;
+}
+
+.sync-status.success::before {
+  content: "✓";
+  color: #67c23a;
+  border-color: #67c23a;
+}
+
+.sync-status.failed {
+  background-color: #fef0f0;
+  color: #f56c6c;
+  border: 1px solid #fbc4c4;
+}
+
+.sync-status.failed::before {
+  content: "×";
+  color: #f56c6c;
+  border-color: #f56c6c;
+}
+
+.sync-status.syncing {
+  background-color: #e6f7ff;
+  color: #1890ff;
+  border: 1px solid #91d5ff;
+}
+
+.sync-status.syncing::before {
+  content: "↻";
+  color: #1890ff;
+  border-color: #1890ff;
+  animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.mirror-list {
+  position: relative;
+}
+/* 筛选弹出框样式 */
+.filter-popup {
+  position: absolute;
+  top: 3rem;
+  left: 50%;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  min-width: 160px;
+  padding: 8px 0;
+  animation: fadeIn 0.2s ease;
+}
+
+
+[data-theme="light"] .filter-popup {
+  background: white;
+  border: 1px solid #efeff5;
+}
+
+[data-theme="light"] .filter-option:hover {
+  background-color: #f5f7fa;
+}
+
+[data-theme="light"] .filter-option input[type="checkbox"] {
+  border: 2px solid #dcdfe6;
+}
+
+[data-theme="light"] .checkbox-custom {
+  color: #5f6059;
+}
+
+[data-theme="light"] .filter-actions {
+  border-top: 1px solid #efeff5;
+}
+
+
+[data-theme="dark"] .filter-popup {
+  background: #1e1e1e;
+  border: 1px solid #2d2d30;
+}
+
+[data-theme="dark"] .filter-option:hover {
+  background-color: #252526;
+}
+
+[data-theme="dark"] .filter-option input[type="checkbox"] {
+  border: 2px solid #404040;
+  background: #333333;
+}
+
+[data-theme="dark"] .checkbox-custom {
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .filter-actions {
+  border-top: 1px solid #2d2d30;
+}
+
+
+.filter-option {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.filter-option input[type="checkbox"] {
+  margin-right: 8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.filter-option input[type="checkbox"]:checked {
+  background-color: #ec6e02;
+  border-color: #ec6e02;
+}
+
+.checkbox-custom {
+  font-size: 14px;
+  cursor: pointer;
+  user-select: none;
+  margin-left: 8px;
+}
+
+.filter-actions {
+  padding: 8px 16px;
+  text-align: right;
+}
+
+.filter-confirm {
+  padding: 6px 16px;
+  background: #ec6e02;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.filter-confirm:hover {
+  background: #ff8533;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 排序和状态筛选相关样式 */
+.sort-header,
+.status-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sort-header,
+.status-header span {
+  margin-right: 5px;
+}
+.help-icon:hover .help-tooltip {
+  display: block;
+}
+
+/* 排序图标样式 */
+.sort-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.sort-icon {
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.sort-icon svg {
+  transition: fill 0.3s ease;
+}
+
+
+[data-theme="light"] .sort-icon svg {
+  fill: #5f6059;
+}
+
+
+[data-theme="dark"] .sort-icon svg {
+  fill: #e0e0e0;
+}
+
+
+.sort-icon.asc {
+  transform: rotate(0deg);
+}
+
+
+.sort-icon.desc {
+  transform: rotate(180deg);
+}
+
+
+.sort-header:hover .sort-icon svg {
+  fill: #ec6e01;
+}
+
+
+.filter-icon {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.filter-icon svg {
+  transition: fill 0.3s ease;
+}
+
+
+[data-theme="light"] .filter-icon svg {
+  fill: #5f6059;
+}
+
+
+[data-theme="dark"] .filter-icon svg {
+  fill: #e0e0e0;
+}
+
+
+.filter-icon:hover svg {
+  fill: #ec6e01;
+}
+
+
+.status-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+
+.filter-option {
+  position: relative;
+}
+
+.filter-option input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkbox-custom {
+  position: relative;
+  padding-left: 28px; 
+  font-size: 14px;
+  cursor: pointer;
+  user-select: none;
+}
+
+
+.checkbox-custom::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 2px;
+  transition: all 0.2s ease;
+}
+
+
+[data-theme="light"] .checkbox-custom::before {
+  border: 2px solid #dcdfe6;
+  background-color: #fff;
+}
+
+
+[data-theme="dark"] .checkbox-custom::before {
+  border: 2px solid #404040;
+  background-color: #333333;
+}
+
+
+.filter-option input[type="checkbox"]:checked + .checkbox-custom::before {
+  background-color: #ec6e02;
+  border-color: #ec6e02;
+}
+
+
+.filter-option input[type="checkbox"]:checked + .checkbox-custom::after {
+  content: "";
+  position: absolute;
+  left: 10%; 
+  top: 45%; 
+  transform: translateY(-50%) rotate(45deg);
+  width: 4px; 
+  height: 9px; 
+  border: solid white;
+  border-width: 0 2px 2px 0; 
+}
+.help-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.help-text {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  cursor: pointer;
+}
+
+.help-icon {
+  display: inline-block;
+}
+
+.center-align {
+  text-align: center;
+}

@@ -1,0 +1,87 @@
+/* 主容器样式 */
+.os-container {
+  display: flex;
+  width: 95%;
+  margin-bottom: 10px;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  min-height: 80vh;
+}
+
+/* 菜单列表基础样式 */
+.os-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+/* 亮色主题列表样式 */
+[data-theme="light"] .os-menu {
+  border: 1px solid #efeff5;
+  background-color: #fff;
+}
+
+[data-theme="light"] .os-menu li {
+  color: #666;
+  border-bottom: 1px solid #efeff5;
+}
+
+[data-theme="light"] .os-menu li:nth-child(even) {
+  background-color: #fafafa;
+}
+
+[data-theme="light"] .os-menu li:nth-child(odd) {
+  background-color: #fff;
+}
+
+/* 暗色主题列表样式 */
+[data-theme="dark"] .os-menu {
+  border: 1px solid #2d2d30;
+  background-color: #1e1e1e;
+}
+
+[data-theme="dark"] .os-menu li {
+  color: #cccccc;
+  border-bottom: 1px solid #2d2d30;
+}
+
+[data-theme="dark"] .os-menu li:nth-child(even) {
+  background-color: #252526;
+}
+
+[data-theme="dark"] .os-menu li:nth-child(odd) {
+  background-color: #1e1e1e;
+}
+
+
+.os-menu li {
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.os-menu li:hover {
+  background-color: #f8f9fa;
+}
+
+[data-theme="light"] .os-menu li:hover {
+  background-color: #f8f9fa;
+}
+
+[data-theme="dark"] .os-menu li:hover {
+  background-color: #2d2d30;
+}
+
+.os-menu li:last-child {
+  border-bottom: none;
+}
+
+
+.os-menu li.active {
+  color: #ec6e01;
+}

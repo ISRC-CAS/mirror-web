@@ -1,0 +1,3 @@
+[submodule "mdxFile"]
+	path = mdxFile
+	url = https://github.com/mirrorz-org/mirrorz-help.git

@@ -1,0 +1,160 @@
+/* 默认样式 */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.9em;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+table th,
+td {
+  padding: 1rem;
+
+  text-align: center;
+}
+
+th {
+  text-align: center;
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+table {
+  border-radius: 5px;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto 2rem;
+  overflow: hidden;
+  border-collapse: collapse;
+}
+
+pre code {
+  display: block;
+  white-space: pre-wrap;
+  word-break: break-all;
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 8px;
+  border-radius: 4px;
+  margin: 8px 0;
+  color: #333;
+}
+code {
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #c7254e;
+  white-space: nowrap;
+  background-color: #f9f2f4;
+  border-radius: 4px;
+}
+[data-theme="light"] h1 {
+  color: #5f6059;
+}
+
+[data-theme="light"] th {
+  color: #5f6059;
+}
+[data-theme="light"] table {
+  border: 1px solid #efeff5;
+}
+[data-theme="dark"] table {
+  border: 1px solid #2d2d30;
+}
+
+/* 表格基础样式 */
+table {
+  border-radius: 5px;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto 2rem;
+  overflow: hidden;
+  border-collapse: collapse;
+}
+
+table th,
+td {
+  padding: 1rem;
+  text-align: center;
+}
+
+th {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+/* 亮色主题表格样式 */
+[data-theme="light"] table {
+  border: 1px solid #efeff5;
+  background-color: #fff;
+}
+
+[data-theme="light"] th {
+  background-color: #fafafa;
+  color: #5f6059;
+  border-bottom: 2px solid #efeff5;
+}
+
+[data-theme="light"] td {
+  color: #666;
+  border-bottom: 1px solid #efeff5;
+}
+
+[data-theme="light"] tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* 暗色主题表格样式 */
+[data-theme="dark"] table {
+  border: 1px solid #2d2d30;
+  background-color: #1e1e1e;
+}
+
+[data-theme="dark"] th {
+  background-color: #252526;
+  color: #e0e0e0;
+  border-bottom: 2px solid #2d2d30;
+}
+
+[data-theme="dark"] td {
+  color: #cccccc;
+  border-bottom: 1px solid #2d2d30;
+}
+
+[data-theme="dark"] tr:hover {
+  background-color: #252526;
+}
+
+/* 表格内链接样式 */
+[data-theme="light"] table a {
+  color: #ec6e01;
+}
+
+[data-theme="dark"] table a {
+  color: #ff8533;
+}
+
+/* 奇偶行样式 */
+[data-theme="light"] tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+[data-theme="dark"] tr:nth-child(even) {
+  background-color: #252526;
+}

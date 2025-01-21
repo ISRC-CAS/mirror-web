@@ -1,0 +1,203 @@
+/* 页面头部样式 */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+/* Logo 样式设置 */
+#logo {
+  display: flex;
+  align-items: center;
+  width: 110;
+  height: 100%;
+  margin: 0 10px;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  gap: 5px;
+}
+.logo-section h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  position: relative;
+  line-height: 1;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1),
+    -1px -1px 0 rgba(255, 255, 255, 0.5);
+  padding-bottom: 2px;
+}
+/* 导航标签相关样式 */
+.nav-tabs {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.tab-btn {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  background: none;
+  font-size: 1rem;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.tab-btn:hover {
+  color: #ec6e01;
+}
+
+.tab-panel {
+  display: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.tab-panel.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 下拉菜单相关样式 */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* 下拉菜单箭头样式 */
+.arrow {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid currentColor;
+  transition: transform 0.3s ease;
+}
+
+.dropdown.active .arrow {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 20%;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+
+[data-theme="light"] .dropdown-menu {
+  background-color: white;
+  border: 1px solid #efeff5;
+}
+
+[data-theme="light"] .dropdown-item {
+  color: #5f6059;
+}
+
+[data-theme="light"] .dropdown-item:hover {
+  background-color: #f5f7fa;
+}
+
+
+[data-theme="dark"] .dropdown-menu {
+  background-color: #1e1e1e;
+  border: 1px solid #2d2d30;
+}
+
+[data-theme="dark"] .dropdown-item {
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .dropdown-item:hover {
+  background-color: #252526;
+}
+
+
+.dropdown-content {
+  padding: 0.5rem 0;
+}
+
+.dropdown-item {
+  display: block;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.dropdown-item:hover {
+  color: #ec6e01;
+}
+
+.dropdown-item::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+[data-theme="light"] .header {
+  border: 1px solid #efeff5;
+  background-color: #fafafa;
+}
+[data-theme="dark"] .header {
+  border: 1px solid #2d2d30;
+  background-color: #313134;
+}
+[data-theme="light"] .tab-btn {
+  color: #5f6059;
+}
+
+
+[data-theme="dark"] .tab-btn {
+  color: #e0e0e0;
+}
+.tab-btn.active {
+  color: #ec6e02;
+}
+
+
+.tab-btn.active {
+  color: #ec6e02;
+  position: relative;
+}
+
+@keyframes slideIn {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+
+
