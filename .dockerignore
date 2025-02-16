@@ -1,0 +1,12 @@
+node_modules/
+.next/
+.github/
+.vscode/
+Dockerfile*
+.dockerignore
+.git
+.gitignore
+build/
+dist/
+
+ 
